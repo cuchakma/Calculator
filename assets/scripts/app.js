@@ -23,16 +23,35 @@ function writeToLog( operationIdentifier, prevResult, operationNumber, newResult
     //console.log(logEntry.result);
 }
 
+function calculateResult(calculationType) {
+    const enteredNumber = getUserInput();
+    const initalResult = currentResult;
+    let mathOperator;
+
+    if( calculationType === 'ADD') {
+        currentResult = currentResult +  enteredNumber;
+        mathOperator = '+';
+    } if( calculationType === 'SUBTRACT' ) {
+        currentResult = currentResult -  enteredNumber;
+        mathOperator = '-';
+    } if( calculationType === 'MULTIPLY') { 
+        currentResult = currentResult * enteredNumber;
+        mathOperator = '*';
+    } if( calculateResult === 'DIVIDE' ) { 
+        currentResult = currentResult /  enteredNumber;
+        mathOperator = '/';
+    }
+    
+    createAndWriteOuput(mathOperator, initalResult, enteredNumber );
+    writeToLog( calculationType, initalResult, enteredNumber, currentResult );
+}
+
 /**
  * add function to add two numbers
  */
 
 function add() {
-    const enteredNumber = getUserInput();
-    const initalResult = currentResult;
-    currentResult = currentResult +  enteredNumber;
-    createAndWriteOuput('+', initalResult, enteredNumber );
-    writeToLog('ADD', initalResult, enteredNumber, currentResult);
+    calculateResult('ADD');
 }
 
 /**
@@ -40,22 +59,14 @@ function add() {
  */
 
 function subtract() {
-    const enteredNumber = getUserInput();
-    const initalResult = currentResult;
-    currentResult = currentResult -  enteredNumber;
-    createAndWriteOuput('-', initalResult, enteredNumber );
-    writeToLog('SUBTRACT', initalResult, enteredNumber, currentResult);
+    calculateResult('SUBTRACT');
 }
 
 /**
  * multiply function to multiply two numbers
  */
 function multiply() {
-    const enteredNumber = getUserInput();
-    const initalResult = currentResult;
-    currentResult = currentResult *  enteredNumber;
-    createAndWriteOuput('*', initalResult, enteredNumber );
-    writeToLog('MULTIPLY', initalResult, enteredNumber, currentResult);
+   calculateResult('MULTIPLY');
 }
 
 /**
@@ -63,11 +74,7 @@ function multiply() {
  */
 
 function divide() {
-    const enteredNumber = getUserInput();
-    const initalResult = currentResult;
-    currentResult = currentResult /  enteredNumber;
-    createAndWriteOuput('/', initalResult, enteredNumber );
-    writeToLog('DIVIDE', initalResult, enteredNumber, currentResult);
+    calculateResult('DIVIDE');
 }
 
 /**

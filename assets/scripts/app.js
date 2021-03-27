@@ -23,64 +23,31 @@ function writeToLog( operationIdentifier, prevResult, operationNumber, newResult
     //console.log(logEntry.result);
 }
 
-function calculateResult(calculationType) {
+function calculate(operation) {
     const enteredNumber = getUserInput();
-    const initalResult = currentResult;
-    let mathOperator;
-
-    if( calculationType === 'ADD') {
-        currentResult = currentResult +  enteredNumber;
-        mathOperator = '+';
-    } if( calculationType === 'SUBTRACT' ) {
-        currentResult = currentResult -  enteredNumber;
-        mathOperator = '-';
-    } if( calculationType === 'MULTIPLY') { 
-        currentResult = currentResult * enteredNumber;
-        mathOperator = '*';
-    } if( calculateResult === 'DIVIDE' ) { 
-        currentResult = currentResult /  enteredNumber;
-        mathOperator = '/';
+    const initalResult  = currentResult;
+    let operator;
+    if( operation == 'ADD') {
+        currentResult += enteredNumber;
+        operator = '+';
+    } else if( operation == 'SUBTRACT') {
+        currentResult -= enteredNumber;
+        operator = '-';
+    } else if( operation == 'MULTIPLY' ) {
+        currentResult *= enteredNumber;
+        operator = '*';
+    } else {
+        currentResult /= enteredNumber;
+        operator = '/';
     }
-    
-    createAndWriteOuput(mathOperator, initalResult, enteredNumber );
-    writeToLog( calculationType, initalResult, enteredNumber, currentResult );
+    createAndWriteOuput(operator, initalResult, enteredNumber );
+    writeToLog(operation, initalResult, enteredNumber, currentResult);
 }
 
 /**
- * add function to add two numbers
+ * Event Listeners for all the buttons e.g - subtract, add, multiply,
  */
-
-function add() {
-    calculateResult('ADD');
-}
-
-/**
- * substract function to subtract two numbers
- */
-
-function subtract() {
-    calculateResult('SUBTRACT');
-}
-
-/**
- * multiply function to multiply two numbers
- */
-function multiply() {
-   calculateResult('MULTIPLY');
-}
-
-/**
- * divide function to divide two numbers
- */
-
-function divide() {
-    calculateResult('DIVIDE');
-}
-
-/**
- * Event Listenrs for all the buttons e.g - subtract, add, multiply,
- */
-addBtn.addEventListener('click', add );
-subtractBtn.addEventListener('click', subtract );
-multiplyBtn.addEventListener('click', multiply);
-divideBtn.addEventListener('click', divide);
+addBtn.addEventListener('click', calculate.bind(this, 'ADD') );
+subtractBtn.addEventListener('click', calculate.bind(this, 'SUBTRACT') );
+multiplyBtn.addEventListener('click', calculate.bind(this, 'MULTIPLY'));
+divideBtn.addEventListener('click', calculate.bind(this, 'DIVIDE') );
